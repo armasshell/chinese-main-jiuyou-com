@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九游 – 简明指南与访问提醒</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f5f7fa;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%);
+            color: #f1f5f9;
+            padding: 4rem 2rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 40%, rgba(56, 189, 248, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.85;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2.8rem;
+            padding: 1rem 2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+            flex-wrap: wrap;
+        }
+
+        .top-nav a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .top-nav a:hover {
+            color: #2563eb;
+            border-bottom-color: #2563eb;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 3rem;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem;
+            color: #0f172a;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.8rem;
+        }
+
+        .section-sub {
+            color: #475569;
+            margin-bottom: 1.8rem;
+            font-size: 1rem;
+        }
+
+        /* 介绍卡片 */
+        .intro-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            margin-bottom: 2.5rem;
+            border: 1px solid #e9edf2;
+        }
+
+        .intro-card p {
+            margin-bottom: 1rem;
+        }
+
+        .intro-card strong {
+            color: #1e293b;
+        }
+
+        /* 三个场景模块 — 卡片网格 */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 1.8rem 0 2.5rem;
+        }
+
+        .scenario-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f6;
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .scenario-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+        }
+
+        .scenario-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #0f172a;
+        }
+
+        .scenario-card h3 span {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .scenario-card p {
+            color: #475569;
+            font-size: 0.95rem;
+        }
+
+        /* 常见说明（FAQ 摘要） */
+        .faq-list {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e9edf2;
+            overflow: hidden;
+            margin: 1.8rem 0 2rem;
+        }
+
+        .faq-item {
+            padding: 1.2rem 1.8rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+
+        .faq-item p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .faq-item a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #b9d4fd;
+        }
+
+        .faq-item a:hover {
+            color: #1d4ed8;
+            border-bottom-style: solid;
+        }
+
+        .inline-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        .reminder-box {
+            background: #fef9e7;
+            border-left: 4px solid #f59e0b;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1.8rem 0;
+            color: #92400e;
+        }
+
+        .reminder-box strong {
+            color: #78350f;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem 1.8rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .top-nav {
+                gap: 1.2rem;
+                font-size: 0.9rem;
+                padding: 0.8rem 1rem;
+            }
+            .container {
+                padding: 1.5rem 1rem 2rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .scenario-grid {
+                grid-template-columns: 1fr;
+            }
+            .faq-item {
+                padding: 1rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<nav class="top-nav">
+    <a href="#intro">简明指南</a>
+    <a href="#scenarios">适用场景</a>
+    <a href="#faq">常见说明</a>
+    <a href="#reminder">访问提醒</a>
+</nav>
+
+<!-- 深色头图 -->
+<section class="hero">
+    <h1>九游 · 简明指南</h1>
+    <p>从日常浏览到资源触达，一份轻量的使用视角与提醒备忘</p>
+</section>
+
+<div class="container">
+
+    <!-- 核心介绍 -->
+    <section id="intro">
+        <h2 class="section-title">简明指南</h2>
+        <div class="intro-card">
+            <p>对很多朋友来说，<strong>九游</strong>并不只是一个名字，它更像一个日常可以顺路去看看的线上角落。页面结构简洁，内容偏向实用与资讯，不需要太多学习成本。</p>
+            <p>如果你是第一次接触，不妨把它当作一个普通的信息站点来对待：先浏览，再判断，最后按需使用。这里没有复杂的门槛，但保持基本的网络常识总是好的。</p>
+            <p>另外，如果你已经在别处听说过 <a href="https://chinese-main-jiuyou.com" class="inline-link">九游</a> 的一些内容，建议直接通过上方链接过去看一眼——亲自确认比道听途说可靠得多。</p>
+        </div>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <section id="scenarios">
+        <h2 class="section-title">三个常见场景</h2>
+        <p class="section-sub">不同的人使用九游的出发点往往不一样，下面三种情况或许能帮你更快找到自己的节奏。</p>
+
+        <div class="scenario-grid">
+            <div class="scenario-card">
+                <h3>日常浏览 <span>轻量</span></h3>
+                <p>只是随意看看，不追求特定目标。九游的页面加载较快，信息密度适中，适合碎片时间翻一翻。建议把链接添加到浏览器书签，方便下次直接过去。</p>
+            </div>
+            <div class="scenario-card">
+                <h3>专题查找 <span>聚焦</span></h3>
+                <p>如果你带着具体兴趣或问题而来，可以留意站内的分类或标签。虽然它不是大型百科，但针对某些主题的整理往往很直接，节省自己到处搜索的精力。</p>
+            </div>
+            <div class="scenario-card">
+                <h3>资源参考 <span>实用</span></h3>
+                <p>部分用户会把九游作为辅助参考源之一。注意：任何站点提供的内容都建议交叉验证，尤其是涉及数据、教程或外部链接时，保持自己的判断力。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <section id="faq">
+        <h2 class="section-title">常见说明</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h4>九游需要注册或登录吗？</h4>
+                <p>大部分内容可以直接浏览，不需要账户。不过部分互动或个性化功能可能要求简单注册，视具体页面而定。</p>
+            </div>
+            <div class="faq-item">
+                <h4>站内链接是否安全？</h4>
+                <p>九游自身维护的页面相对规范，但任何网站都可能包含外部跳转。建议对陌生链接保持基本警惕，不轻易提交个人信息。</p>
+            </div>
+            <div class="faq-item">
+                <h4>从哪里开始最直接？</h4>
+                <p>如果你还没确定方向，可以先进 <a href="https://chinese-main-jiuyou.com">九游</a> 首页随便逛逛，看到感兴趣的话题再深入。没有固定路线，舒服就好。</p>
+            </div>
+            <div class="faq-item">
+                <h4>内容更新频率如何？</h4>
+                <p>九游的更新节奏不算密集，但内容保质期较长。你可以隔一段时间再去看看，通常会有一些补充或调整。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 访问提醒 (偏生活化) -->
+    <section id="reminder">
+        <h2 class="section-title">访问提醒</h2>
+        <div class="reminder-box">
+            <strong>📌 几个小提醒：</strong>
+            <ul style="margin: 0.6rem 0 0 1.3rem; list-style: disc; color: #78350f;">
+                <li>使用公共设备浏览后，记得退出或清除临时记录。</li>
+                <li>如果遇到页面打不开或加载异常，可以先检查自己的网络，也可以过段时间再试试。</li>
+                <li>不要完全依赖单一来源——把九游当作参考之一，而不是唯一标准。</li>
+                <li>把链接分享给朋友时，提醒对方也留意浏览环境。</li>
+            </ul>
+            <p style="margin-top: 0.8rem;">说到底，网络工具是用来服务日常的，保持轻松心态，好用就留着，不顺手就换。希望 <a href="https://chinese-main-jiuyou.com" class="inline-link">九游</a> 能在你的某个片段里恰好派上用场。</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>基于日常使用整理 · 内容仅供参考 · 请自行判断与验证</p>
+</footer>
+
+</body>
+</html>

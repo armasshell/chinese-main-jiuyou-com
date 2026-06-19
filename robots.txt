@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://armasshell.github.io/chinese-main-jiuyou-com/sitemap.xml
